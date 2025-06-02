@@ -1,0 +1,108 @@
+{
+  "name": "template-picker",
+  "displayName": "Template Picker",
+  "description": "Create new workspace from selected template",
+  "version": "0.8.0",
+  "icon": "images/icon.png",
+  "author": "Dhani Novan",
+  "publisher": "leonkasovan",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "templates",
+          "title": "Templates",
+          "icon": "images/icon.svg"
+        }
+      ]
+    },    
+    "views": {
+      "templates": [
+        {
+          "id": "templatesSearch",
+          "name": "Search",
+          "icon": "images/icon.svg"
+        },
+        {
+          "id": "templatesInstalled",
+          "name": "Installed",
+          "icon": "images/icon.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "template-picker.useTemplate",
+        "title": "Use Template",
+        "icon": "$(run-all)",
+        "category": "Template Picker"
+      },
+      {
+        "command": "template-picker.shareTemplate",
+        "title": "Share Template",
+        "icon": "$(cloud-upload)",
+        "category": "Template Picker"
+      },
+      {
+        "command": "template-picker.deleteTemplate",
+        "title": "Delete Template",
+        "icon": "$(trash)",
+        "category": "Template Picker"
+      },
+      {
+        "command": "template-picker.createWorkspaceFromTemplate",
+        "title": "Create Workspace from Template",
+        "category": "Template Picker"
+      },
+      {
+        "command": "template-picker.showDate",
+        "title": "Show Date",
+        "category": "Template Picker"
+      },
+      {
+        "command": "template-picker.showPath",
+        "title": "Show Extension Path",
+        "category": "Template Picker"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "template-picker.shareTemplate",
+          "when": "view == templatesInstalled && viewItem == zipFile",
+          "group": "inline"
+        },
+        {
+          "command": "template-picker.deleteTemplate",
+          "when": "view == templatesInstalled && viewItem == zipFile",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.100.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.25.1"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.0",
+    "yauzl": "^3.2.0"
+  }
+}
