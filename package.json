@@ -23,7 +23,7 @@
           "icon": "images/icon.svg"
         }
       ]
-    },    
+    },
     "views": {
       "templates": [
         {
@@ -40,6 +40,16 @@
     },
     "commands": [
       {
+        "command": "template-picker.downloadTemplate",
+        "title": "Download Template",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "template-picker.refreshTemplate",
+        "title": "Refresh Template",
+        "icon": "$(refresh)"
+      },
+      {
         "command": "template-picker.useTemplate",
         "title": "Use Template",
         "icon": "$(run-all)",
@@ -48,8 +58,7 @@
       {
         "command": "template-picker.shareTemplate",
         "title": "Share Template",
-        "icon": "$(cloud-upload)",
-        "category": "Template Picker"
+        "icon": "$(share)"
       },
       {
         "command": "template-picker.deleteTemplate",
@@ -84,6 +93,18 @@
           "command": "template-picker.deleteTemplate",
           "when": "view == templatesInstalled && viewItem == zipFile",
           "group": "inline"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "template-picker.refreshTemplate",
+          "when": "view == templatesInstalled",
+          "group": "navigation"
+        },
+        {
+          "command": "template-picker.downloadTemplate",
+          "when": "view == templatesInstalled",
+          "group": "navigation"
         }
       ]
     }
