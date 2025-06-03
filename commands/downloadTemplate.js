@@ -31,15 +31,16 @@ async function downloadFile(url, savePath) {
 
 	const buffer = await res.arrayBuffer();
 	await fs.promises.writeFile(savePath, Buffer.from(buffer));
-	vscode.window.showInformationMessage(`Template ${savePath} downloaded successfully.`);
+	// vscode.window.showInformationMessage(`Template ${savePath} downloaded successfully.`);
 }
 
 
-async function updateLocalTemplates(context) {
+async function downloadTemplate(context, installedViewProvider) {
 	const templatesDir = path.join(context.extensionPath, 'templates');
 	const owner = 'leonkasovan';
 	const repo = 'vscode-templates';
 	const zipFiles = await getGitHubZipFiles(owner, repo);
+	let nDownloaded = 0;
 
 	for (const file of zipFiles) {
 		const localPath = path.join(templatesDir, file.name);
@@ -48,11 +49,19 @@ async function updateLocalTemplates(context) {
 			console.log(`Skipped (already exists): ${file.name}`);
 		} catch {
 			await downloadFile(file.download_url, localPath);
+			nDownloaded++;
 		}
+	}
+
+	if (nDownloaded > 0) {
+		vscode.window.showInformationMessage(`Downloaded ${nDownloaded} new template(s).`);
+		installedViewProvider.refresh();
+	} else {
+		vscode.window.showInformationMessage('No new templates to download.');
 	}
 }
 
 module.exports = {
 	command: 'template-picker.downloadTemplate',
-	handler: (context) => updateLocalTemplates(context)
+	handler: (context, installedViewProvider) => () => downloadTemplate(context, installedViewProvider)
 };

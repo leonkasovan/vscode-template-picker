@@ -3,7 +3,7 @@
   "displayName": "Template Picker",
   "description": "Create new workspace from selected template",
   "version": "0.8.0",
-  "icon": "images/icon.png",
+  "icon": "images/template-picker.png",
   "author": "Dhani Novan",
   "publisher": "leonkasovan",
   "engines": {
@@ -20,7 +20,7 @@
         {
           "id": "templates",
           "title": "Templates",
-          "icon": "images/icon.svg"
+          "icon": "images/template-picker.svg"
         }
       ]
     },
@@ -29,12 +29,12 @@
         {
           "id": "templatesSearch",
           "name": "Search",
-          "icon": "images/icon.svg"
+          "icon": ""
         },
         {
           "id": "templatesInstalled",
           "name": "Installed",
-          "icon": "images/icon.svg"
+          "icon": ""
         }
       ]
     },
@@ -97,12 +97,12 @@
       ],
       "view/title": [
         {
-          "command": "template-picker.refreshTemplate",
+          "command": "template-picker.downloadTemplate",
           "when": "view == templatesInstalled",
           "group": "navigation"
         },
         {
-          "command": "template-picker.downloadTemplate",
+          "command": "template-picker.refreshTemplate",
           "when": "view == templatesInstalled",
           "group": "navigation"
         }
