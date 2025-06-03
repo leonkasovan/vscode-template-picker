@@ -3,14 +3,15 @@ const fs = require('fs');
 const path = require('path');
 
 function registerAllCommands(context, installedViewProvider) {
-	const commandsDir = __dirname;
-
+	const commandsDir = path.join(context.extensionPath, 'commands');
+	console.log(`Registering commands from: ${commandsDir}`);
 	const files = fs.readdirSync(commandsDir).filter(file =>
 		file.endsWith('.js') && file !== 'index.js'
 	);
 
 	for (const file of files) {
 		const commandModule = require(path.join(commandsDir, file));
+		console.log(`Registering command id=${commandModule.command}`);
 
 		const commandId = commandModule.command;
 		const handler = typeof commandModule.handler === 'function'

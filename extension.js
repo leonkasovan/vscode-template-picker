@@ -5,36 +5,10 @@ const vscode = require('vscode');
 const path = require('path');
 const templates = require('./moduleTemplate');
 const { registerAllCommands } = require('./commands');
-
-// Define SimpleTreeDataProvider class
-class SimpleTreeDataProvider {
-	/**
-	 * @param {string[]} items
-	 */
-	constructor(items) {
-		this.items = items;
-	}
-
-	/**
-	 * @param {vscode.TreeItem} element
-	 * @returns {vscode.TreeItem}
-	 */
-	getTreeItem(element) {
-		return element;
-	}
-
-	/**
-	 * @returns {Thenable<vscode.TreeItem[]>}
-	 */
-	getChildren() {
-		return Promise.resolve(
-			this.items.map(label => new vscode.TreeItem(label))
-		);
-	}
-}
   
 function activate(context) {
-
+	console.log('Template Picker extension is now active!');
+	vscode.window.showInformationMessage('Template Picker extension is now active!');
 	// Search panel (dummy)
 	// const searchViewProvider = new SimpleTreeDataProvider([
 	// 	'Template A',
