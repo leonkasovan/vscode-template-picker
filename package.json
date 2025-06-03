@@ -27,11 +27,6 @@
     "views": {
       "templates": [
         {
-          "id": "templatesSearch",
-          "name": "Search",
-          "icon": ""
-        },
-        {
           "id": "templatesInstalled",
           "name": "Installed",
           "icon": ""
@@ -69,16 +64,6 @@
       {
         "command": "template-picker.createWorkspaceFromTemplate",
         "title": "Create Workspace from Template",
-        "category": "Template Picker"
-      },
-      {
-        "command": "template-picker.showDate",
-        "title": "Show Date",
-        "category": "Template Picker"
-      },
-      {
-        "command": "template-picker.showPath",
-        "title": "Show Extension Path",
         "category": "Template Picker"
       }
     ],

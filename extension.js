@@ -36,11 +36,11 @@ class SimpleTreeDataProvider {
 function activate(context) {
 
 	// Search panel (dummy)
-	const searchViewProvider = new SimpleTreeDataProvider([
-		'Template A',
-		'Template B'
-	]);
-	vscode.window.registerTreeDataProvider('templatesSearch', searchViewProvider);
+	// const searchViewProvider = new SimpleTreeDataProvider([
+	// 	'Template A',
+	// 	'Template B'
+	// ]);
+	// vscode.window.registerTreeDataProvider('templatesSearch', searchViewProvider);
 
 	// Installed panel (from zip files in 'templates' folder)
 	const installedViewProvider = new templates.InstalledTemplateProvider(path.join(context.extensionPath, 'templates'));
