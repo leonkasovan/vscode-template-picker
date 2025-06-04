@@ -4,6 +4,8 @@ Create new workspace from selected template.
 
 ## Features
 ![feature 1](images/feature-1.png)
+![feature 2](images/feature-2.png)
+![feature 3](images/feature-3.png)
 - Browse and manage installed project templates from the Templates activity bar.
 - Download new templates from a remote repository (GitHub).
 - Create a new workspace from a selected template.

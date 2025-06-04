@@ -97,6 +97,7 @@ async function shareTemplate(context, item) {
 		console.error('Invalid item provided to shareTemplate');
 		return;
 	}
+	vscode.window.showInformationMessage(`Uploading template: ${item.label} to ${owner}/${repo} repository ...`);
 	const templatesDir = path.join(context.extensionPath, 'templates');
 	uploadFileToPublicRepo(owner, repo, item.label, path.join(templatesDir, item.label), decrypt('CwwbBh4DLB8XFTFdVC5cICI8LCdROSUCPioeADIsJjgkM1Q2KB8MQgMmDgA4Eis5LgsdOTFVXSAtDB0xDycHDzheWDcNHlhTBhpHFhovIyU0ITY+Ij1TPxwOXSVf'), 'Upload via vscode extension')
 		.then(msg => vscode.window.showInformationMessage(msg))

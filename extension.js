@@ -5,12 +5,17 @@ const vscode = require('vscode');
 const path = require('path');
 const templates = require('./moduleTemplate');
 const { registerAllCommands } = require('./commands');
+const downloader = require('./commands/downloadTemplate');
   
 function activate(context) {
 	// Installed panel (from zip files in 'templates' folder)
 	const installedViewProvider = new templates.InstalledTemplateProvider(path.join(context.extensionPath, 'templates'));
 	vscode.window.registerTreeDataProvider('templatesInstalled', installedViewProvider);
 
+	// Download addtional templates from public GitHub repository
+	downloader.downloadTemplate(context, installedViewProvider);
+
+	// Register all commands
 	registerAllCommands(context, installedViewProvider);
 }
 

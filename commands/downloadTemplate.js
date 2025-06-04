@@ -42,6 +42,7 @@ async function downloadTemplate(context, installedViewProvider) {
 	const zipFiles = await getGitHubZipFiles(owner, repo);
 	let nDownloaded = 0;
 
+	vscode.window.showInformationMessage(`Downloading templates from ${owner}/${repo} ...`);
 	for (const file of zipFiles) {
 		const localPath = path.join(templatesDir, file.name);
 		try {
@@ -62,6 +63,7 @@ async function downloadTemplate(context, installedViewProvider) {
 }
 
 module.exports = {
+	downloadTemplate,
 	command: 'template-picker.downloadTemplate',
 	handler: (context, installedViewProvider) => () => downloadTemplate(context, installedViewProvider)
 };

@@ -41,23 +41,25 @@
       {
         "command": "template-picker.openTemplateFolder",
         "title": "Open Template Folder",
-        "icon": "$(folder)"
+        "icon": "$(folder)",
+        "category": "Template Picker"
       },
       {
         "command": "template-picker.downloadTemplate",
         "title": "Download Template",
-        "icon": "$(cloud-download)"
+        "icon": "$(cloud-download)",
+        "category": "Template Picker"
       },
       {
         "command": "template-picker.refreshTemplate",
         "title": "Refresh Template",
-        "icon": "$(refresh)"
+        "icon": "$(refresh)",
+        "category": "Template Picker"
       },
       {
         "command": "template-picker.useTemplate",
         "title": "Use Template",
-        "icon": "$(run-all)",
-        "category": "Template Picker"
+        "icon": "$(run-all)"
       },
       {
         "command": "template-picker.shareTemplate",
@@ -67,8 +69,7 @@
       {
         "command": "template-picker.deleteTemplate",
         "title": "Delete Template",
-        "icon": "$(trash)",
-        "category": "Template Picker"
+        "icon": "$(trash)"
       },
       {
         "command": "template-picker.createWorkspaceFromTemplate",
