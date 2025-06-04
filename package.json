@@ -106,6 +106,17 @@
           "group": "navigation"
         }
       ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Template Picker Configuration",
+      "properties": {
+        "template-picker.projectDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Default directory where new projects will be created."
+        }
+      }
     }
   },
   "scripts": {
