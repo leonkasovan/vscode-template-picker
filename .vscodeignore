@@ -1,4 +1,3 @@
-node_modules/**
 .vscode/**
 .vscode-test/**
 test/**
@@ -9,3 +8,9 @@ vsc-extension-quickstart.md
 **/*.map
 **/eslint.config.mjs
 **/.vscode-test.*
+node_modules/
+!node_modules/jszip/
+!node_modules/setimmediate/
+!node_modules/lie/
+!node_modules/pako/
+!node_modules/readable-stream/
