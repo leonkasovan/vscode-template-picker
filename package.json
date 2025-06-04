@@ -39,6 +39,11 @@
     },
     "commands": [
       {
+        "command": "template-picker.openTemplateFolder",
+        "title": "Open Template Folder",
+        "icon": "$(folder)"
+      },
+      {
         "command": "template-picker.downloadTemplate",
         "title": "Download Template",
         "icon": "$(cloud-download)"
@@ -92,6 +97,11 @@
         },
         {
           "command": "template-picker.refreshTemplate",
+          "when": "view == templatesInstalled",
+          "group": "navigation"
+        },
+        {
+          "command": "template-picker.openTemplateFolder",
           "when": "view == templatesInstalled",
           "group": "navigation"
         }

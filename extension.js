@@ -7,15 +7,6 @@ const templates = require('./moduleTemplate');
 const { registerAllCommands } = require('./commands');
   
 function activate(context) {
-	console.log('Template Picker extension is now active!');
-	vscode.window.showInformationMessage('Template Picker extension is now active!');
-	// Search panel (dummy)
-	// const searchViewProvider = new SimpleTreeDataProvider([
-	// 	'Template A',
-	// 	'Template B'
-	// ]);
-	// vscode.window.registerTreeDataProvider('templatesSearch', searchViewProvider);
-
 	// Installed panel (from zip files in 'templates' folder)
 	const installedViewProvider = new templates.InstalledTemplateProvider(path.join(context.extensionPath, 'templates'));
 	vscode.window.registerTreeDataProvider('templatesInstalled', installedViewProvider);
