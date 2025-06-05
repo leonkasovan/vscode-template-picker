@@ -1,11 +1,11 @@
 # Template Picker
 
-Create new workspace from selected template.
+Create new workspace / project from selected template.  
+
+![feature 1](images/feature-1.png)  
+![feature 2](images/feature-2.png)  
 
 ## Features
-![feature 1](images/feature-1.png)
-![feature 2](images/feature-2.png)
-![feature 3](images/feature-3.png)
 - Browse and manage installed project templates from the Templates activity bar.
 - Download new templates from a remote repository (GitHub).
 - Create a new workspace from a selected template.
@@ -13,9 +13,8 @@ Create new workspace from selected template.
 - Refresh the list of installed templates.
 
 ## Requirements
-
 - Visual Studio Code v1.90.0 or newer.
-- Internet connection required to download templates from GitHub.
+- Internet connection required to download templates from GitHub (optional).
 
 ## Extension Settings
 
@@ -42,14 +41,23 @@ This extension contributes the following settings:
 - **Template Picker: Show Extension Path**  
   Show the extension installation path.
 
-## Known Issues
+## Creating Custom Templates
+Create workspace then rename the folder name using tags 
+```
+[language][library1_used][library2_used]This is my template using library1 and library2 
 
-- Only `.zip` templates are supported.
-- Downloaded templates must be compatible with the extension's expected structure.
+Example:
+[cpp][sdl2][imgui]Basic usage of imgui
+[love]Template for animation
+[go][glfw][opengl] Basic shader
+```
+Zip the folder and copy the zip to template folder.  
+![Action Button](images/feature-3.png)  
+![template folder](images/feature-4.png)
 
 ## Release Notes
 
-### 0.8.0
+### 1.0.0
 
 - Initial release with template management, download, and workspace creation features.
 

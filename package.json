@@ -2,10 +2,10 @@
   "name": "template-picker",
   "displayName": "Template Picker",
   "description": "Create new workspace from selected template",
-  "version": "0.8.0",
+  "version": "1.0.1",
   "icon": "images/template-picker.png",
   "author": "Dhani Novan",
-  "publisher": "leonkasovan",
+  "publisher": "dhaninovan",
   "repository": {
     "type": "git",
     "url": "https://github.com/leonkasovan/vscode-template-picker.git"
