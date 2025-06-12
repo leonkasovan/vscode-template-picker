@@ -1,9 +1,9 @@
 # Change Log
 
-All notable changes to the "template-picker" extension will be documented in this file.
+### 1.1.0
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+- Add: Create new template from current workspace.
 
-## [Unreleased]
+### 1.0.0
 
-- Initial release
+- Initial release with template management, download, and workspace creation features.

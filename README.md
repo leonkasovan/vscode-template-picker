@@ -1,14 +1,30 @@
 # Template Picker
 
-Create new workspace / project from selected template.  
+Create new workspace from selected template.
+It will help you quickly scaffold new projects in Visual Studio Code using ready-made templates.  
+Even you can make your own templates and share it for others.
 
+## Included Templates
+![glfw](images/glfw.png)
+![opengl](images/opengl.png)
+![love2d](images/love2d.png)
+![python](images/python.png)
+![sdl](images/sdl.png)
+![sfml](images/sfml.jpg)  
+and more to come ...
+
+## Usage
+In sidebar just pick a template to use  
 ![feature 1](images/feature-1.png)  
+  
+Ctrl+Shift+P and type Template Picker  
 ![feature 2](images/feature-2.png)  
 
 ## Features
 - Browse and manage installed project templates from the Templates activity bar.
 - Download new templates from a remote repository (GitHub).
 - Create a new workspace from a selected template.
+- Create new template from current workspace.
 - Share or delete installed templates.
 - Refresh the list of installed templates.
 
@@ -36,10 +52,8 @@ This extension contributes the following settings:
   Delete a template.
 - **Template Picker: Create Workspace from Template**  
   Create a new workspace from a template.
-- **Template Picker: Show Date**  
-  Show the current date.
-- **Template Picker: Show Extension Path**  
-  Show the extension installation path.
+- **Template Picker: Create New Template From Current Workspace**  
+  Create new template from current workspace.
 
 ## Creating Custom Templates
 Create workspace then rename the folder name using tags 
@@ -56,6 +70,10 @@ Zip the folder and copy the zip to template folder.
 ![template folder](images/feature-4.png)
 
 ## Release Notes
+
+### 1.1.0
+
+- Add: Create new template from current workspace.
 
 ### 1.0.0
 

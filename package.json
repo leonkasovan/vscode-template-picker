@@ -2,7 +2,7 @@
   "name": "template-picker",
   "displayName": "Template Picker",
   "description": "Create new workspace from selected template",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "icon": "images/template-picker.png",
   "author": "Dhani Novan",
   "publisher": "dhaninovan",
@@ -38,6 +38,12 @@
       ]
     },
     "commands": [
+      {
+        "command": "template-picker.createTemplateFromWorkspace",
+        "title": "Create New Template From Current Workspace",
+        "icon": "$(file-zip)",
+        "category": "Template Picker"
+      },
       {
         "command": "template-picker.openTemplateFolder",
         "title": "Open Template Folder",
@@ -78,6 +84,13 @@
       }
     ],
     "menus": {
+      "explorer/context": [
+        {
+          "command": "template-picker.createTemplateFromWorkspace",
+          "when": "resourceScheme == 'file'",
+          "group": "navigation"
+        }
+      ],
       "view/item/context": [
         {
           "command": "template-picker.shareTemplate",
@@ -91,6 +104,11 @@
         }
       ],
       "view/title": [
+        {
+          "command": "template-picker.createTemplateFromWorkspace",
+          "when": "view == workbench.explorer.fileView",
+          "group": "navigation"
+        },
         {
           "command": "template-picker.downloadTemplate",
           "when": "view == templatesInstalled",
