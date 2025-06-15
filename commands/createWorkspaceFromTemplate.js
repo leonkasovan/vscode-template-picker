@@ -166,7 +166,7 @@ async function createWorkspaceFromTemplate(context) {
 		vscode.window.showErrorMessage(`No zip file found for template "${dirname}"`);
 		return;
 	}
-	moduleTemplate.extractDirFromZip(path.join(templatesDir, zipname), dirname, destDir)
+	moduleTemplate.extractFirstDirectoryFromZip(path.join(templatesDir, zipname), dirname, destDir)
 		.then(() => vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(destDir), false))
 		.catch(console.error);
 }

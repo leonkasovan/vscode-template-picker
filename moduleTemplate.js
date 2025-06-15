@@ -3,6 +3,7 @@
 // and provide a tree view of installed templates.
 // Developed by Dhani Novan (leonkasovan@gmail.com) Jakarta, 30 Mei 2025
 
+const fsSync = require('fs');
 const fs = require('fs').promises;
 const path = require('path');
 const vscode = require('vscode');
@@ -99,7 +100,7 @@ class InstalledTemplateProvider {
 * @param {string} dirname - The top-level directory to extract (e.g. "[lua]basic")
 * @param {string} outputDir - Output Directory
 */
-async function extractDirFromZip(zipPath, dirname, outputDir) {
+async function extractFirstDirectoryFromZip(zipPath, dirname, outputDir) {
 	const data = await fs.readFile(zipPath);
 	const zip = await JSZip.loadAsync(data);
 
@@ -121,4 +122,74 @@ async function extractDirFromZip(zipPath, dirname, outputDir) {
 	}
 }
 
-module.exports = {InstalledTemplateProvider, extractDirFromZip};
+// Example usage:
+// const zipFile = 'shared.zip';
+// const zipDir = 'src/cimgui';
+// const outputDir = path.join(os.homedir(), 'Project', 'MyNewProject', 'cimgui');
+// extractDirectoryFromZip(zipFile, zipDir, outputDir)
+// 	.catch(console.error);
+async function extractDirectoryFromZip(zipFilePath, zipDirPrefix, outputDir) {
+    try {
+        const zipBuffer = fsSync.readFileSync(zipFilePath);
+        const zip = await JSZip.loadAsync(zipBuffer);
+        
+        // Get matching entries
+        if (!zipDirPrefix.endsWith('/')) zipDirPrefix += '/';
+        const entries = Object.entries(zip.files)
+            .filter(([name, file]) => name.startsWith(zipDirPrefix) && !file.dir)
+            .map(([name, file]) => ({ name, file }));
+            
+        // Process files one by one
+        for (const {name, file} of entries) {
+            try {
+                const relativePath = name.slice(zipDirPrefix.length);
+                const destPath = path.join(outputDir, relativePath);
+                const dirPath = path.dirname(destPath);
+                await fs.mkdir(dirPath, { recursive: true });
+                
+                let content;
+                try {
+                    content = await file.async('nodebuffer');
+                } catch (extractError) {
+                    throw new Error(`Extraction failed: ${extractError.message}`);
+                }
+                if (!content) {
+                    throw new Error('No content extracted');
+                }
+                await fsSync.writeFileSync(destPath, content);
+            } catch (error) {
+                console.error(`[moduleTemplate.js] Failed to extract ${name}:`, error.message);
+                continue; // Skip to next file on error
+            }
+        }
+        return true;
+    } catch (error) {
+        console.error('[moduleTemplate.js] Fatal error:', error.message);
+        throw error;
+    }
+}
+
+// Example usage
+// const zipFilePath = 'shared.zip';
+// const fileInZip = 'bin/linux/x64/imgui.so';
+// const outputPath = path.join(os.homedir(), 'Project', 'MyNewProject', 'imgui.so');
+// extractFileFromZip(zipFilePath, fileInZip, outputPath)
+// 	.catch(console.error);
+async function extractFileFromZip(zipFilePath, internalPath, outputPath) {
+    try {
+        const data = await fs.readFile(zipFilePath);
+        const zip = await JSZip.loadAsync(data);
+        const file = zip.file(internalPath);
+        if (!file) {
+            throw new Error(`File "${internalPath}" not found in ${zipFilePath}`);
+        }
+        const content = await file.async('nodebuffer');
+        await fs.mkdir(path.dirname(outputPath), { recursive: true });
+        await fs.writeFile(outputPath, content);
+    } catch (err) {
+        console.error('Error in extractFileFromZip:', err);
+        throw err;
+    }
+}
+  
+module.exports = { InstalledTemplateProvider, extractFirstDirectoryFromZip, extractDirectoryFromZip, extractFileFromZip };
