@@ -5,12 +5,13 @@ It will help you quickly scaffold new projects in Visual Studio Code using ready
 Even you can make your own templates and share it for others.
 
 ## Included Templates
-![glfw](images/glfw.png)
-![opengl](images/opengl.png)
-![love2d](images/love2d.png)
+![cpp](images/cpp.png)
+![go](images/go.png)
 ![python](images/python.png)
+![love2d](images/love2d.png)
+![opengl](images/opengl.png)
 ![sdl](images/sdl.png)
-![sfml](images/sfml.jpg)  
+![glfw](images/glfw.png)  
 and more to come ...
 
 ## Usage
