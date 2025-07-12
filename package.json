@@ -2,7 +2,7 @@
   "name": "template-picker",
   "displayName": "Template Picker",
   "description": "Create new workspace from selected template",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "icon": "images/template-picker.png",
   "author": "Dhani Novan",
   "publisher": "dhaninovan",

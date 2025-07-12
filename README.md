@@ -30,7 +30,7 @@ Ctrl+Shift+P and type Template Picker
 - Refresh the list of installed templates.
 
 ## Requirements
-- Visual Studio Code v1.90.0 or newer.
+- Visual Studio Code v1.100.0 or newer.
 - Internet connection required to download templates from GitHub (optional).
 
 ## Extension Settings
@@ -71,6 +71,12 @@ Zip the folder and copy the zip to template folder.
 ![template folder](images/feature-4.png)
 
 ## Release Notes
+
+### 1.2.5
+- Fix: custom command unzip
+
+### 1.2.4
+- Add: custom command for copying common library
 
 ### 1.1.0
 
