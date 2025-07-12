@@ -47,7 +47,7 @@ async function downloadTemplate(context, installedViewProvider) {
 		const localPath = path.join(templatesDir, file.name);
 		try {
 			await fs.promises.access(localPath);
-			console.log(`Skipped (already exists): ${file.name}`);
+			// console.log(`Skipped (already exists): ${file.name}`);
 		} catch {
 			await downloadFile(file.download_url, localPath);
 			nDownloaded++;

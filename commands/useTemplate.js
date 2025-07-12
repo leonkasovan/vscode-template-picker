@@ -82,12 +82,12 @@ async function useTemplate(context, item) {
 								path.join(destDir, cmd.targetDir, path.basename(cmd.srcPath)) :
 								path.join(destDir, path.basename(cmd.srcPath));
 
-							await fs.mkdir(targetPath, { recursive: true });	// ensure target path is exists
-
 							if (cmd.type === 'file') {
+								await fs.mkdir(path.dirname(targetPath), { recursive: true });	// ensure target path is exists
 								await moduleTemplate.extractFileFromZip(cmd.zipPath, cmd.srcPath, targetPath);
 								// console.log(`Extracted file: ${cmd.srcPath} to ${targetPath}`);
 							} else if (cmd.type === 'dir') {
+								await fs.mkdir(targetPath, { recursive: true });	// ensure target path is exists
 								await moduleTemplate.extractDirectoryFromZip(cmd.zipPath, cmd.srcPath, targetPath);
 								// console.log(`Extracted directory: ${cmd.srcPath} to ${targetPath}`);
 							}

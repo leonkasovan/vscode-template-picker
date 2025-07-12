@@ -72,6 +72,9 @@ Zip the folder and copy the zip to template folder.
 
 ## Release Notes
 
+### 1.2.8
+- Fix: custom command unzip
+
 ### 1.2.7
 - Update: shared library
 
