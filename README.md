@@ -72,6 +72,9 @@ Zip the folder and copy the zip to template folder.
 
 ## Release Notes
 
+### 1.2.6
+- Update: get zip templates from github repo
+
 ### 1.2.5
 - Fix: custom command unzip
 
