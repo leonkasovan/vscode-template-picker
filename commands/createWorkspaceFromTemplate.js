@@ -6,6 +6,7 @@ const vscode = require('vscode');
 const fs = require('fs').promises;
 const path = require('path');
 const JSZip = require('jszip');
+const os = require('os');
 const moduleTemplate = require('../moduleTemplate');
 
 const contentToZipMap = new Map(); // Global map: content string => zip file name
@@ -119,13 +120,13 @@ async function createWorkspaceFromTemplate(context) {
 	let entries = [];
 	let selected = null;
 	const config = vscode.workspace.getConfiguration('template-picker');
-    let projectDir = config.get('projectDirectory', '');
+	let projectDir = config.get('projectDirectory', '');
 
-    if (!projectDir) {
+	if (!projectDir) {
 		let projectDirUri = await vscode.window.showOpenDialog({
 			canSelectFolders: true,
 			canSelectFiles: false,
-			openLabel: 'Select Project Directory'		
+			openLabel: 'Select Project Directory'
 		});
 		if (!projectDirUri || projectDirUri.length === 0) {
 			return;
@@ -133,7 +134,7 @@ async function createWorkspaceFromTemplate(context) {
 		projectDir = projectDirUri[0].fsPath;
 		config.update('projectDirectory', projectDir, vscode.ConfigurationTarget.Global);
 	}
-	
+
 	const templatesDir = path.join(context.extensionPath, 'templates');
 	const templates = await listTemplates(templatesDir);
 	if (templates.length === 0) {
@@ -166,7 +167,13 @@ async function createWorkspaceFromTemplate(context) {
 		vscode.window.showErrorMessage(`No zip file found for template "${dirname}"`);
 		return;
 	}
-	moduleTemplate.extractFirstDirectoryFromZip(path.join(templatesDir, zipname), dirname, destDir)
+	const vars = {
+		extensionPath: context.extensionPath,
+		platform: os.platform(),
+		arch: os.arch(),
+		lib_ext: os.platform() === 'win32' ? 'dll' : 'so',
+	};
+	moduleTemplate.extractFirstDirectoryFromZip(path.join(templatesDir, zipname), dirname, destDir, vars)
 		.then(() => vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(destDir), false))
 		.catch(console.error);
 }
