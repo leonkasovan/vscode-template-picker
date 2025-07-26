@@ -9,6 +9,79 @@ const path = require('path');
 const vscode = require('vscode');
 const JSZip = require('jszip');
 
+class SnippetsProvider {
+	constructor(snippetDir) {
+		this.snippetDir = snippetDir;
+		this._onDidChangeTreeData = new vscode.EventEmitter();
+		this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+	}
+
+	async getChildren(element) {
+		if (!element) {
+			const files = await fs.readdir(this.snippetDir);
+			return files.filter(f => f.endsWith('.zip')).map(name => {
+				const item = new vscode.TreeItem(name, vscode.TreeItemCollapsibleState.Collapsed);
+				item.resourceUri = vscode.Uri.file(path.join(this.snippetDir, name));
+				item.contextValue = 'zip';
+				return item;
+			});
+		} else if (element.contextValue === 'zip') {
+			const zipPath = element.resourceUri.fsPath;
+			const buffer = await fs.readFile(zipPath);
+			const zip = await JSZip.loadAsync(buffer);
+			const items = [];
+
+			for (const name in zip.files) {
+				const file = zip.files[name];
+				if (!file.dir) {
+					items.push({
+						label: name,
+						command: {
+							command: 'snippetExplorer.openSnippet',
+							arguments: [{
+								label: path.basename(name),
+								content: await file.async('string'),
+								language: guessLangFromExt(name)
+							}]
+						}
+					});
+				}
+			}
+
+			return items.map(i => {
+				const item = new vscode.TreeItem(i.label, vscode.TreeItemCollapsibleState.None);
+				item.command = { ...i.command, title: 'Open Snippet' };
+				item.iconPath = new vscode.ThemeIcon('file-code');
+				item.contextValue = 'file';
+				return item;
+			});
+		}
+		return [];
+	}
+
+	getTreeItem(element) {
+		return element;
+	}
+}
+
+function guessLangFromExt(filename) {
+	const ext = path.extname(filename).toLowerCase();
+	return {
+		'.lua': 'lua',
+		'.js': 'javascript',
+		'.ts': 'typescript',
+		'.py': 'python',
+		'.cpp': 'cpp',
+		'.c': 'c',
+		'.cs': 'csharp',
+		'.java': 'java',
+		'.go': 'go',
+		'.html': 'html',
+		'.css': 'css',
+		'.json': 'json'
+	}[ext] || 'plaintext';
+}
+
 class InstalledTemplateProvider {
 	constructor(templateDir) {
 		this.templateDir = templateDir;
@@ -248,4 +321,4 @@ async function extractFileFromZip(zipFilePath, internalPath, outputPath) {
 	}
 }
 
-module.exports = { InstalledTemplateProvider, extractFirstDirectoryFromZip, extractDirectoryFromZip, extractFileFromZip };
+module.exports = { InstalledTemplateProvider, extractFirstDirectoryFromZip, extractDirectoryFromZip, extractFileFromZip, SnippetsProvider };

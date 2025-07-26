@@ -1,5 +1,9 @@
 # Change Log
 
+### 1.3.0
+- Add: snippets explorer
+- Fix: sort templates name
+
 ### 1.2.8
 - Fix: custom command unzip
 
